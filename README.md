@@ -6,7 +6,7 @@
 ![Platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6.svg)
 ![Electron 42](https://img.shields.io/badge/Electron-42-47848F.svg)
 
-![Meeting Airplane demo](docs/demo.png)
+![Meeting Airplane: a plane towing a "Design review in 5 min" banner flies across the screen](docs/demo.gif)
 
 Meeting Airplane is a Windows tray app. It watches your Google Calendar (read-only) and, a few minutes before each meeting, flies a transparent, click-through, always-on-top airplane across the screen with the meeting name on its banner. It never takes focus and ignores the mouse, so you can keep working while it passes.
 

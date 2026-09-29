@@ -1,0 +1,44 @@
+{
+  "name": "windows-meeting-airplane",
+  "version": "0.1.0",
+  "description": "Windows tray app that flies an airplane towing a banner across your screen before Google Calendar meetings.",
+  "main": "src/main.js",
+  "private": true,
+  "license": "MIT",
+  "author": "Vraj Patel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vraj-p8/meeting-airplane.git"
+  },
+  "homepage": "https://github.com/vraj-p8/meeting-airplane#readme",
+  "bugs": {
+    "url": "https://github.com/vraj-p8/meeting-airplane/issues"
+  },
+  "keywords": [
+    "electron",
+    "windows",
+    "tray",
+    "meeting-reminder",
+    "google-calendar",
+    "calendar",
+    "desktop-app",
+    "notification"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "smoke": "electron . --smoke-test",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer/settings.js && node --check src/renderer/overlay.js",
+    "package:win": "electron-packager . MeetingAirplane --platform=win32 --arch=x64 --overwrite --out=release --ignore=\"^/[.]github\" --ignore=\"^/docs\" --ignore=\"^/release\" --ignore=\"^/[.]claude\" --ignore=\"[.]md$\" --ignore=\"[.]cmd$\""
+  },
+  "dependencies": {
+    "googleapis": "^172.0.0"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.0",
+    "electron": "^42.2.0"
+  }
+}

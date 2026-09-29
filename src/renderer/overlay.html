@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' file: data:; style-src 'self' 'unsafe-inline'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Airplane Overlay</title>
+    <link rel="stylesheet" href="./overlay.css">
+  </head>
+  <body>
+    <div id="flightPath" class="flight-path" aria-hidden="true">
+      <div id="flightRig" class="flight-rig">
+        <div id="banner" class="banner"><span id="bannerTitle" class="banner-title">Meeting</span><span id="bannerWhen" class="banner-when"> in 5 min</span></div>
+        <div class="tow-zone">
+          <div class="smoke-stream">
+            <span class="smoke-puff puff-1"></span>
+            <span class="smoke-puff puff-2"></span>
+            <span class="smoke-puff puff-3"></span>
+            <span class="smoke-puff puff-4"></span>
+            <span class="smoke-puff puff-5"></span>
+            <span class="smoke-puff puff-6"></span>
+            <span class="smoke-puff puff-7"></span>
+            <span class="smoke-puff puff-8"></span>
+          </div>
+          <span class="tow-cable"></span>
+        </div>
+        <img class="plane" src="./assets/airplane.svg" alt="">
+      </div>
+    </div>
+    <script src="./overlay.js"></script>
+  </body>
+</html>

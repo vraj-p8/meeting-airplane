@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' file: data:; style-src 'self' 'unsafe-inline'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Airplane</title>
+    <link rel="stylesheet" href="./settings.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Desktop reminder</p>
+          <h1>Meeting Airplane</h1>
+        </div>
+        <button id="testButton" class="primary-button" type="button">Test Airplane</button>
+      </header>
+
+      <section class="preview-panel" aria-label="Preview">
+        <div class="preview-track">
+          <div class="preview-rig">
+            <div class="preview-banner">Standup in 5 min</div>
+            <div class="preview-tow-zone">
+              <div class="preview-smoke-stream">
+                <span class="preview-smoke-puff preview-puff-1"></span>
+                <span class="preview-smoke-puff preview-puff-2"></span>
+                <span class="preview-smoke-puff preview-puff-3"></span>
+                <span class="preview-smoke-puff preview-puff-4"></span>
+                <span class="preview-smoke-puff preview-puff-5"></span>
+              </div>
+              <span class="preview-tow-cable"></span>
+            </div>
+            <img class="preview-plane" src="./assets/airplane.svg" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Color Presets</h2>
+          </div>
+          <div id="presetList" class="preset-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Custom Colors</h2>
+          </div>
+          <div class="color-grid">
+            <label>
+              <span>Banner</span>
+              <input id="bannerColor" type="color">
+            </label>
+            <label>
+              <span>Text</span>
+              <input id="textColor" type="color">
+            </label>
+            <label>
+              <span>Smoke</span>
+              <input id="smokeColor" type="color">
+            </label>
+          </div>
+          <div class="asset-actions">
+            <button id="selectPlaneButton" class="secondary-button" type="button">Select Plane SVG</button>
+            <p id="planeAssetHelp" class="help-text">Using the built-in airplane. Pick any SVG to swap it.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Timing</h2>
+          </div>
+          <div class="control-stack">
+            <label>
+              <span>Alert minutes before</span>
+              <input id="alertMinutesBefore" type="text" inputmode="numeric" placeholder="10, 5, 1">
+              <small class="field-hint">Comma-separated reminders, for example 15, 10, 5, 1.</small>
+            </label>
+            <label>
+              <span>Poll interval seconds</span>
+              <input id="pollIntervalSeconds" type="number" min="15" max="600" step="15">
+            </label>
+            <label>
+              <span>Flight duration seconds</span>
+              <input id="flightDurationSeconds" type="number" min="3" max="20" step="0.5">
+            </label>
+            <label>
+              <span>Vertical position</span>
+              <input id="verticalPercent" type="range" min="10" max="80" step="1">
+            </label>
+            <label class="check-row">
+              <input id="startWithWindows" type="checkbox">
+              <span>Start automatically when Windows starts</span>
+            </label>
+            <small id="startupHelp" class="field-hint">The app will start in the tray and poll Google Calendar in the background.</small>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Google Calendar</h2>
+            <span id="calendarBadge" class="badge">Not connected</span>
+          </div>
+          <div class="calendar-actions">
+            <button id="selectCredentialsButton" class="secondary-button" type="button">Select OAuth JSON</button>
+            <button id="connectGoogleButton" class="secondary-button" type="button">Connect Google Calendar</button>
+            <button id="disconnectGoogleButton" class="ghost-button" type="button">Disconnect</button>
+          </div>
+          <p id="calendarHelp" class="help-text">Use a Google OAuth Desktop app JSON file. The app requests read-only event access.</p>
+        </div>
+      </section>
+    </main>
+    <script src="./settings.js"></script>
+  </body>
+</html>

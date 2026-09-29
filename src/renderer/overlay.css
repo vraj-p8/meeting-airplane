@@ -1,0 +1,211 @@
+:root {
+  --banner: #ff7ab8;
+  --text: #ffffff;
+  --smoke: #ffc4dc;
+  --duration: 8500ms;
+  --top: 38vh;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  pointer-events: none;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.flight-path {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+}
+
+.flight-path.is-active {
+  opacity: 1;
+}
+
+.flight-rig {
+  position: absolute;
+  top: var(--top);
+  left: 0;
+  display: flex;
+  align-items: center;
+  transform: translateX(-100%);
+}
+
+.flight-path.is-active .flight-rig {
+  animation: fly-across var(--duration) linear forwards;
+}
+
+.banner {
+  min-width: 260px;
+  max-width: 520px;
+  padding: 13px 22px;
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--banner);
+  box-shadow: 0 14px 24px rgb(17 24 39 / 18%);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.15;
+  white-space: nowrap;
+  transform: rotate(-.4deg);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Long meeting titles get an ellipsis; the "in N min" part is always visible. */
+.banner-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.banner-when {
+  flex-shrink: 0;
+  white-space: pre;
+}
+
+.tow-zone {
+  position: relative;
+  flex: 0 0 132px;
+  height: 82px;
+  margin: 0 -14px 0 0;
+  z-index: 1;
+}
+
+.tow-cable {
+  position: absolute;
+  left: -2px;
+  right: 7px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(88 88 91 / 50%), rgb(88 88 91 / 88%), rgb(88 88 91 / 55%));
+  top: 40px;
+}
+
+.smoke-stream {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  z-index: 0;
+}
+
+.smoke-stream::before,
+.smoke-stream::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 32px;
+  width: 95px;
+  height: 26px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 22% 48%, color-mix(in srgb, var(--smoke) 78%, #ffffff) 0 18%, transparent 31%),
+    radial-gradient(circle at 48% 42%, color-mix(in srgb, var(--smoke) 70%, #ffffff) 0 16%, transparent 32%),
+    radial-gradient(circle at 76% 54%, color-mix(in srgb, var(--smoke) 82%, #ffffff) 0 18%, transparent 34%);
+  filter: blur(5px);
+  opacity: 0;
+  animation: smoke-ribbon 1800ms linear infinite;
+}
+
+.smoke-stream::after {
+  top: 43px;
+  animation-delay: -900ms;
+  transform: scale(.8);
+}
+
+.smoke-puff {
+  --size: 26px;
+  --drift-y: -9px;
+  position: absolute;
+  right: 4px;
+  top: 30px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgb(255 255 255 / 92%), transparent 28%),
+    radial-gradient(circle at 52% 54%, color-mix(in srgb, var(--smoke) 88%, #ffffff) 0 48%, color-mix(in srgb, var(--smoke) 62%, transparent) 69%, transparent 75%);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--smoke) 76%, transparent),
+    inset -6px -8px 13px rgb(255 255 255 / 24%);
+  opacity: 0;
+  animation: smoke-flow 2100ms linear infinite;
+}
+
+.puff-1 { --size: 24px; --drift-y: -18px; animation-delay: 0ms; }
+.puff-2 { --size: 17px; --drift-y: 13px; animation-delay: -260ms; top: 42px; }
+.puff-3 { --size: 30px; --drift-y: -5px; animation-delay: -520ms; top: 36px; }
+.puff-4 { --size: 20px; --drift-y: 18px; animation-delay: -780ms; top: 46px; }
+.puff-5 { --size: 34px; --drift-y: -14px; animation-delay: -1040ms; top: 29px; }
+.puff-6 { --size: 18px; --drift-y: 10px; animation-delay: -1300ms; top: 48px; }
+.puff-7 { --size: 27px; --drift-y: -1px; animation-delay: -1560ms; top: 38px; }
+.puff-8 { --size: 16px; --drift-y: 16px; animation-delay: -1820ms; top: 44px; }
+
+.plane {
+  width: 260px;
+  height: auto;
+  display: block;
+  margin-left: -16px;
+  object-fit: contain;
+  z-index: 3;
+}
+
+@keyframes fly-across {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes smoke-flow {
+  0% {
+    opacity: 0;
+    filter: blur(.2px);
+    transform: translateX(0) translateY(0) scale(.36);
+  }
+
+  12% {
+    opacity: .9;
+  }
+
+  68% {
+    opacity: .55;
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateX(-165px) translateY(var(--drift-y)) scale(2.15);
+  }
+}
+
+@keyframes smoke-ribbon {
+  0% {
+    opacity: 0;
+    transform: translateX(0) scale(.45);
+  }
+
+  18% {
+    opacity: .42;
+  }
+
+  70% {
+    opacity: .28;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-135px) scale(1.6);
+  }
+}

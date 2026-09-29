@@ -1,0 +1,10 @@
+node_modules/
+release/
+dist/
+*.log
+.env
+google-credentials.json
+user-data/
+.claude/
+.vscode/
+Thumbs.db

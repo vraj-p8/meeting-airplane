@@ -91,24 +91,26 @@ The app polls your **primary** calendar for upcoming events that have a start ti
 ## How it works
 
 ```mermaid
-flowchart LR
-  subgraph Main["Main process (src/main.js)"]
-    Tray["Tray menu"]
-    Poller["Calendar poller"]
-    Store["Settings and tokens (userData)"]
-  end
-  Preload["Preload bridge (src/preload.js)"]
-  Settings["Settings window"]
-  Overlay["Overlay window (transparent, click-through)"]
-  Google["Google Calendar API"]
+flowchart TB
+  Google[("Google Calendar API")]
 
-  Poller -->|"events.list (read-only)"| Google
-  Poller -->|"meeting due"| Overlay
-  Tray -->|"Test Airplane"| Overlay
-  Settings <-->|"IPC"| Preload
-  Overlay <-->|"IPC"| Preload
-  Preload <-->|"ipcMain.handle"| Main
-  Main --- Store
+  subgraph Main["Main process · src/main.js"]
+    direction LR
+    Poller["Calendar poller"]
+    Tray["Tray menu"]
+    Store[("Settings + tokens<br/>userData")]
+  end
+
+  Bridge{{"IPC · preload bridge<br/>src/preload.js"}}
+  Settings["Settings window"]
+  Overlay["Overlay window<br/>transparent · click-through"]
+
+  Google -->|"events.list (read-only)"| Poller
+  Poller -->|"meeting due"| Bridge
+  Tray -->|"Test Airplane"| Bridge
+  Store <-->|"read / write"| Bridge
+  Bridge <-->|"settings · calendar"| Settings
+  Bridge -->|"overlay:play"| Overlay
 ```
 
 - The **main process** owns everything privileged: the tray, the polling timer, the OAuth flow, settings storage and the two windows.
